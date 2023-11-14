@@ -1,0 +1,65 @@
+<!-- <div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>Card Content Here</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div> -->
+
+<!--dash.component.html-->
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <!--Mini Cards-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard?.cols" [rowspan]="( cardLayout | async )?.miniCard?.rows">
+      <app-card title="Select Stock">
+          <app-stock-selector></app-stock-selector>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let i of [2, 3, 4]" [colspan]="( cardLayout | async )?.miniCard?.cols"
+      [rowspan]="( cardLayout | async )?.miniCard?.rows">
+      <app-card title="Card {{i}}"><div>Mini Card Content Here</div></app-card>
+    </mat-grid-tile>
+    <!--Charts-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Radar PoC">
+          <app-product-sales-chart></app-product-sales-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Line chart PoC">
+        <app-poc-line-chart></app-poc-line-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Stock price">
+        <app-stock-price></app-stock-price>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let i of [7, 8]" [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Card {{i}}"><div>Chart Content Here</div></app-card>
+    </mat-grid-tile>
+    <!--Table-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
+      <app-card title="Card 9"><div>Table Content Here</div></app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
