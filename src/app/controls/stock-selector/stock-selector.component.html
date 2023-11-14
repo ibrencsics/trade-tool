@@ -1,1 +1,7 @@
-<p>stock-selector works!</p>
+<mat-form-field>
+  <mat-label>Symbol</mat-label>
+  <mat-select>
+    <mat-option>None</mat-option>
+    <mat-option *ngFor="let symbol of symbols" [value]="symbol">{{symbol}}</mat-option>
+  </mat-select>
+</mat-form-field>

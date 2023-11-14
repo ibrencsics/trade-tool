@@ -1,0 +1,11 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Stocks</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <!--Mini Cards-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard?.cols" [rowspan]="( cardLayout | async )?.miniCard?.rows">
+      <app-card title="Select Stock">
+          <app-stock-selector></app-stock-selector>
+      </app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
