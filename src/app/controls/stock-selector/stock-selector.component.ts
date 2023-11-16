@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { StockChartData } from 'src/app/stocks/stock-chart-data';
 
 @Component({
   selector: 'app-stock-selector',
@@ -16,6 +17,8 @@ export class StockSelectorComponent {
     "1d", "1w", "1m", "1y", "5y"
   ]
 
+  @Output() selected = new EventEmitter<StockChartData>();
+
   profileForm = new FormGroup({
     symbol: new FormControl(this.symbols.at(0)),
     timeframe: new FormControl(this.timeframes.at(0)),
@@ -28,7 +31,10 @@ export class StockSelectorComponent {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.info(this.profileForm.value);
+    this.selected.emit({
+      symbol: this.profileForm.value.symbol as any,
+      timeframe: this.profileForm.value.timeframe as any
+    });
   }
 }

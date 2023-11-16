@@ -4,8 +4,21 @@
     <!--Mini Cards-->
     <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard?.cols" [rowspan]="( cardLayout | async )?.miniCard?.rows">
       <app-card title="Select Stock">
-          <app-stock-selector></app-stock-selector>
+          <app-stock-selector (selected)="onSelected($event)"></app-stock-selector>
       </app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <mat-grid-tile
+      *ngFor="let c of charts"
+      [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows"
+    >
+      <!-- <app-card title="Stock price">
+        <app-stock-price></app-stock-price>
+      </app-card> -->
+      <app-card title="Card {{c}}" (removed)="remove(c)"><div>Chart Content Here</div></app-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
