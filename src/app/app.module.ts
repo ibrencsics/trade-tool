@@ -12,6 +12,7 @@ import { StocksComponent } from './stocks/stocks.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -21,7 +22,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CardComponent } from './card/card.component';
 import { ProductSalesChartComponent } from './charts/product-sales-chart/product-sales-chart.component';
@@ -48,6 +51,7 @@ import { StockSelectorComponent } from './controls/stock-selector/stock-selector
     NgChartsModule,
     MatToolbarModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -58,7 +62,8 @@ import { StockSelectorComponent } from './controls/stock-selector/stock-selector
     MatFormFieldModule, 
     MatSelectModule, 
     MatInputModule, 
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

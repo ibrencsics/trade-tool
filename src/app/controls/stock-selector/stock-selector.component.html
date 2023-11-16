@@ -1,7 +1,33 @@
-<mat-form-field>
+<!-- <mat-form-field>
   <mat-label>Symbol</mat-label>
   <mat-select>
     <mat-option>None</mat-option>
     <mat-option *ngFor="let symbol of symbols" [value]="symbol">{{symbol}}</mat-option>
   </mat-select>
-</mat-form-field>
+</mat-form-field> -->
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+  
+    
+  <mat-form-field appearance="fill">
+    <mat-label>Symbol</mat-label>
+    <mat-select formControlName="symbol">
+      <mat-option *ngFor="let symbol of symbols" [value]="symbol">{{symbol}}</mat-option>
+    </mat-select>
+    <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
+    <mat-hint>Stock symbol</mat-hint>
+  </mat-form-field>
+
+
+
+  <mat-button-toggle-group name="timeframe" aria-label="Timeframe" formControlName="timeframe">
+    <mat-button-toggle *ngFor="let t of timeframes" [value]="t">{{t}}</mat-button-toggle>
+  </mat-button-toggle-group>
+
+
+
+  <button mat-raised-button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+  
+</form>

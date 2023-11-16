@@ -1,0 +1,11 @@
+form  {
+  padding: 0 16px;
+}
+
+mat-button-toggle-group {
+  margin: 0 16px;
+}
+
+mat-form-field {
+  width: 150px;
+}
