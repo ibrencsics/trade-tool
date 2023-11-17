@@ -11,16 +11,27 @@ import { StockChartData } from './stock-chart-data';
 export class StocksComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
-  charts = ["Test"];
+  charts: StockChartData[] = [];
 
   onSelected(stockChartData: StockChartData) {
-    this.charts.push(stockChartData.symbol + " : " + stockChartData.timeframe);
+    for (let c of this.charts) {
+      if (c.symbol === stockChartData.symbol && c.timeframe === stockChartData.timeframe) {
+        console.log("Already there");
+        return;
+      }
+    }
+    this.charts.push(stockChartData);
   }
 
-  remove(chart: string) {
-    console.info("Remove " + chart);
-    const index = this.charts.indexOf(chart);
-    this.charts.splice(index, 1);
+  remove(stockChartData: StockChartData) {
+    let index = 0;
+    for (let c of this.charts) {
+      if (c.symbol === stockChartData.symbol && c.timeframe === stockChartData.timeframe) {
+        console.log("Delete " + index);
+        this.charts.splice(index, 1);
+      }
+      index++;
+    }
   }
 
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(

@@ -15,10 +15,10 @@
       [colspan]="( cardLayout | async )?.chart?.cols"
       [rowspan]="( cardLayout | async )?.chart?.rows"
     >
-      <!-- <app-card title="Stock price">
+      <app-card title="Stock price {{c.symbol}} - {{c.timeframe}}" (removed)="remove(c)">
         <app-stock-price></app-stock-price>
-      </app-card> -->
-      <app-card title="Card {{c}}" (removed)="remove(c)"><div>Chart Content Here</div></app-card>
+      </app-card>
+      <!-- <app-card title="Card {{c}}" (removed)="remove(c)"><div>Chart Content Here</div></app-card> -->
     </mat-grid-tile>
   </mat-grid-list>
 </div>
