@@ -25,3 +25,15 @@ input.ng-dirty.ng-valid {
 input.ng-dirty.ng-invalid {
   border: 2px solid red;
 }
+
+/* To make the toggle button group text horizontally centered */
+
+.mat-button-toggle-button {
+  height: 100%;
+}
+
+.mat-button-toggle-label-content {
+  padding: 0 0 !important;
+  height: 100%;
+  width: 100%;
+}

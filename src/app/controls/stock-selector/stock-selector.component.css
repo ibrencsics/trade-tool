@@ -1,11 +1,23 @@
 form  {
-  padding: 0 16px;
-}
-
-mat-button-toggle-group {
-  margin: 0 16px;
+  padding: 0 5px;
+  font-size: small;
 }
 
 mat-form-field {
-  width: 150px;
+  width: 40%;
+}
+
+mat-button-toggle-group {
+  margin: 0 5px;
+  width: 50%;
+  height: 30px;
+}
+
+mat-button-toggle {
+  width: 20%;
+  height: 100%;
+}
+
+mat-button-toggle > * {
+  height: 100%;
 }
