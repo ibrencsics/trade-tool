@@ -48,11 +48,11 @@
         <app-poc-line-chart></app-poc-line-chart>
       </app-card>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+    <!-- <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
       <app-card title="Stock price">
         <app-stock-price></app-stock-price>
       </app-card>
-    </mat-grid-tile>
+    </mat-grid-tile> -->
     <mat-grid-tile *ngFor="let i of [7, 8]" [colspan]="( cardLayout | async )?.chart?.cols"
       [rowspan]="( cardLayout | async )?.chart?.rows">
       <app-card title="Card {{i}}"><div>Chart Content Here</div></app-card>

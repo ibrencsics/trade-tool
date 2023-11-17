@@ -1,11 +1,11 @@
-import { Component, ViewChild, OnChanges, OnInit } from '@angular/core';
+import { Component, ViewChild, OnChanges, OnInit, Input } from '@angular/core';
 import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { FinnhubClientService } from 'src/app/services/finnhub-client.service';
 import { Candles } from 'src/app/services/candles';
 import { tap, map } from 'rxjs';
-
-//import Annotation from 'chartjs-plugin-annotation';
+import Annotation from 'chartjs-plugin-annotation';
+import { StockChartData } from 'src/app/stocks/stock-chart-data';
 
 @Component({
   selector: 'app-stock-price',
@@ -13,25 +13,26 @@ import { tap, map } from 'rxjs';
   styleUrls: ['./stock-price.component.css']
 })
 export class StockPriceComponent implements OnInit {
-  private newLabel? = 'New label';
+  @Input({ required: true }) stockChartData!: StockChartData;
 
   constructor(private http: FinnhubClientService) {
     Chart.register(/*Annotation*/);
   }
 
   ngOnInit(): void {
-    this.draw("AAPL");
+    this.draw();
   }
 
-  draw(symbol: string) {
-    this.http.getCandles(symbol, new Date(1695710710000), new Date(1698302710000)).pipe(
+  draw() {
+    // this.http.getCandles(symbol, new Date(1695710710000), new Date(1698302710000)).pipe(
+    this.http.getCandles_(this.stockChartData).pipe(
       tap(candles => console.log(candles)),
       map(candles => {
         this.lineChartData.datasets = [];
 
         this.lineChartData.datasets.push({
           data: candles.c,
-          label: symbol,
+          label: this.stockChartData.symbol,
           backgroundColor: 'rgba(148,159,177,0.2)',
           borderColor: 'rgba(148,159,177,1)',
           pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -68,7 +69,27 @@ export class StockPriceComponent implements OnInit {
     },
 
     plugins: {
-      legend: { display: true }
+      legend: { display: true },
+      annotation: {
+        annotations: [
+          {
+            type: 'line',
+            scaleID: 'x',
+            value: 'March',
+            borderColor: 'orange',
+            borderWidth: 2,
+            label: {
+              display: true,
+              position: 'center',
+              color: 'orange',
+              content: 'LineAnno',
+              font: {
+                weight: 'bold',
+              },
+            },
+          },
+        ],
+      },
     },
     // responsive: true,
     // maintainAspectRatio: false,

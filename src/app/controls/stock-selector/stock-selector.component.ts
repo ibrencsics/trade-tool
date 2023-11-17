@@ -21,7 +21,7 @@ export class StockSelectorComponent {
 
   profileForm = new FormGroup({
     symbol: new FormControl(this.symbols.at(0)),
-    timeframe: new FormControl(this.timeframes.at(0)),
+    timeframe: new FormControl(this.timeframes.at(2)),
   });
 
   constructor() {
