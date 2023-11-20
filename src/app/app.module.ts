@@ -31,6 +31,7 @@ import { ProductSalesChartComponent } from './charts/product-sales-chart/product
 import { StockPriceComponent } from './charts/stock-price/stock-price.component';
 import { PocLineChartComponent } from './charts/poc-line-chart/poc-line-chart.component';
 import { StockSelectorComponent } from './controls/stock-selector/stock-selector.component';
+import { DestatisComponent } from './destatis/destatis.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { StockSelectorComponent } from './controls/stock-selector/stock-selector
     StockPriceComponent,
     PocLineChartComponent,
     StockSelectorComponent,
-    StocksComponent
+    StocksComponent,
+    DestatisComponent
   ],
   imports: [
     BrowserModule,
