@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { DateValue } from './date-value';
@@ -18,8 +18,12 @@ export class PythonClientService {
     // ).subscribe()
   }
 
-  getRule4(): Observable<Rule4> {
-    return this.http.get<Rule4>(this.urlRule4).pipe(
+  getRule4(sort_column: string, sort_direction: string): Observable<Rule4> {
+    let params = new HttpParams()
+      .set('sort_column', sort_column)
+      .set('sort_direction', sort_direction)
+      ;
+    return this.http.get<Rule4>(this.urlRule4, {params}).pipe(
       tap(val => console.log(val))
     )
   };
