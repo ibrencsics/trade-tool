@@ -1,0 +1,24 @@
+<div class="grid-container">
+    <h1 class="mat-h1">Dividends</h1>
+    <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+      <!--Mini Cards-->
+      <mat-grid-tile [colspan]="( cardLayout | async )?.miniCard?.cols" [rowspan]="( cardLayout | async )?.miniCard?.rows">
+        <app-card title="Control Pane">
+            <!-- <app-dividend-selector (selected)="onSelected($event)"></app-dividend-selector> -->
+            <app-dividend-selector (command)="onCommand($event)"></app-dividend-selector>
+        </app-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  
+    <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+      <mat-grid-tile
+        *ngFor="let c of charts"
+        [colspan]="( cardLayout | async )?.table?.cols"
+        [rowspan]="( cardLayout | async )?.table?.rows"
+      >
+        <app-card title="Filtered with rule4" (removed)="remove(c)">
+          <app-dividend-table [command]="c"></app-dividend-table>
+        </app-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>

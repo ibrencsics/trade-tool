@@ -11,7 +11,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 })
 export class NavComponent {
 
-  menuItems = ['dashboard', 'stocks', 'germany', 'hungary', 'usa'];
+  menuItems = ['dashboard', 'stocks', 'dividends', 'germany', 'hungary', 'usa'];
 
   private breakpointObserver = inject(BreakpointObserver);
 

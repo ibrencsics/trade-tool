@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +33,9 @@ import { StockPriceComponent } from './charts/stock-price/stock-price.component'
 import { PocLineChartComponent } from './charts/poc-line-chart/poc-line-chart.component';
 import { StockSelectorComponent } from './controls/stock-selector/stock-selector.component';
 import { DestatisComponent } from './destatis/destatis.component';
+import { DividendComponent } from './dividend/dividend.component';
+import { DividendSelectorComponent } from './controls/dividend-selector/dividend-selector.component';
+import { DividendTableComponent } from './charts/dividend-table/dividend-table.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,10 @@ import { DestatisComponent } from './destatis/destatis.component';
     PocLineChartComponent,
     StockSelectorComponent,
     StocksComponent,
-    DestatisComponent
+    DestatisComponent,
+    DividendComponent,
+    DividendSelectorComponent,
+    DividendTableComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +71,7 @@ import { DestatisComponent } from './destatis/destatis.component';
     MatFormFieldModule, 
     MatSelectModule, 
     MatInputModule, 
+    MatTableModule,
     FormsModule,
     ReactiveFormsModule
   ],
