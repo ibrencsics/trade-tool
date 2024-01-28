@@ -21,7 +21,7 @@ export class DividendComponent extends BaseComponent implements OnInit {
     
   }
 
-  onCommand(command: DividendCommand) {
+  onCommand(command: DividendCommand) {  
     this.charts.push(command);
 
     // if (command.runRule4) {

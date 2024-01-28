@@ -1,1 +1,5 @@
 npm install -g @angular/cli
+
+
+curl http://python:8000/dividend/rule/4
+ng serve

@@ -21,7 +21,7 @@ export class DividendTableComponent implements AfterViewInit  {
 
   displayedColumns: string[] = [
     'symbol', 'company', 'sector', 'industry', 'price', 'pe', 'div_yield', 'avg_yield_5y', 
-    'current_div', 'previous_div', 'dgr_1y', 'dgr_3y', 'dgr_5y', 'dgr_10y'];
+    'current_div', 'previous_div', 'dgr_1y', 'dgr_3y', 'dgr_5y', 'dgr_10y', 'select'];
   
   dataSource: StockData[] = [];
   
