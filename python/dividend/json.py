@@ -20,3 +20,11 @@ class StockData(BaseModel):
 
 class Rule4(BaseModel):
     stockData: List[StockData]
+
+class TimeAndValue(BaseModel):
+    timestamp: str
+    value: float
+
+class DividendHistory(BaseModel):
+    symbol: str
+    values: List[TimeAndValue]

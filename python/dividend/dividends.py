@@ -4,7 +4,7 @@ import yfinance as yf
 
 from fastapi import APIRouter
 
-from dividend.json import StockData, Rule4
+from dividend.json import StockData, Rule4, TimeAndValue, DividendHistory
 
 router = APIRouter()
 # from fastapi import FastAPI
@@ -93,12 +93,22 @@ def df2json(symbol: str, df: pd.DataFrame):
                      dgr_5y=df.dgr_5y[symbol],
                      dgr_10y=df.dgr_10y[symbol])
 
+
 @router.get("/dividend/rule/2/{symbol}")
 async def rule2(symbol: str):
     ticker = yf.Ticker(symbol)
     div = ticker.dividends
     # Rule 2: Dividend always growing
-    return div.to_dict()
+
+    values = list()
+    # for ts in div.index:
+        # values.append(ts, div)
+    for index, value in div.items():
+        values.append(TimeAndValue(timestamp=index.strftime('%Y-%m-%d'), value=value))
+        
+    return DividendHistory(symbol=symbol, values=values)
+    
+    # return div.to_dict()
 
 def get_dataframe():
     # Rule 1: Take the dividend champions
