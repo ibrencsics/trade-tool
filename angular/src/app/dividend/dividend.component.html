@@ -16,9 +16,22 @@
         [colspan]="( cardLayout | async )?.table?.cols"
         [rowspan]="( cardLayout | async )?.table?.rows"
       >
-        <app-card title="Filtered with rule4" (removed)="remove(c)">
-          <app-dividend-table [command]="c"></app-dividend-table>
+        <app-card title="Filtered with rule4">
+          <app-dividend-table [command]="c" (singleCommand)="onSymbol($event)"></app-dividend-table>
         </app-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+      <mat-grid-tile
+        *ngFor="let c of charts2"
+        [colspan]="( cardLayout | async )?.chart?.cols"
+        [rowspan]="( cardLayout | async )?.chart?.rows"
+      >
+        <app-card title="Stock dividend {{c.symbol}}" (removed)="remove(c)">
+          <app-dividend-history [command]="c"></app-dividend-history>
+        </app-card>
+        <!-- <app-card title="Card {{c}}" (removed)="remove(c)"><div>Chart Content Here</div></app-card> -->
       </mat-grid-tile>
     </mat-grid-list>
   </div>

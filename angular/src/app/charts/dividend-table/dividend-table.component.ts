@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Observable, map, merge, startWith, switchMap } from 'rxjs';
@@ -13,6 +13,7 @@ import { Rule4, StockData } from 'src/app/services/stock-data';
 })
 export class DividendTableComponent implements AfterViewInit  {
   @Input({required: true}) command!: DividendCommand;
+  @Output() singleCommand = new EventEmitter<DividendCommand>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -47,5 +48,12 @@ export class DividendTableComponent implements AfterViewInit  {
       })
     )
     .subscribe(data => (this.dataSource = data));
+  }
+
+  onSelect(symbol: string) {
+    this.singleCommand.emit({
+      runRule4: false,
+      symbol: symbol
+    });
   }
 }

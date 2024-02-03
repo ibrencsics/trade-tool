@@ -39,6 +39,7 @@ import { DestatisComponent } from './destatis/destatis.component';
 import { DividendComponent } from './dividend/dividend.component';
 import { DividendSelectorComponent } from './controls/dividend-selector/dividend-selector.component';
 import { DividendTableComponent } from './charts/dividend-table/dividend-table.component';
+import { DividendHistoryComponent } from './charts/dividend-history/dividend-history.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DividendTableComponent } from './charts/dividend-table/dividend-table.c
     DestatisComponent,
     DividendComponent,
     DividendSelectorComponent,
-    DividendTableComponent
+    DividendTableComponent,
+    DividendHistoryComponent
   ],
   imports: [
     BrowserModule,

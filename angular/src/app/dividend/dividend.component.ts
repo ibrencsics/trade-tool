@@ -12,6 +12,7 @@ import { DividendCommand } from './dividend-command';
 export class DividendComponent extends BaseComponent implements OnInit {
 
   charts: DividendCommand[] = [];
+  charts2: DividendCommand[] = [];
 
   constructor(private http: PythonClientService) {
     super();
@@ -31,6 +32,10 @@ export class DividendComponent extends BaseComponent implements OnInit {
     //     tap(val => console.log(val))
     //   ).subscribe();
     // }
+  }
+
+  onSymbol(command: DividendCommand) {
+    this.charts2.push(command);
   }
 
   remove(command: DividendCommand) {

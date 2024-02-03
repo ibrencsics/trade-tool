@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { DateValue } from './date-value';
 import { Rule4 } from './stock-data';
+import { DividendHistory } from './dividend-history-data';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class PythonClientService {
     )
   };
 
-  getRule2(symbol: string): Observable<DateValue[]> {
-    return this.http.get<DateValue[]>(`${this.urlRule2}/${symbol}`);
+  getRule2(symbol: string): Observable<DividendHistory> {
+    return this.http.get<DividendHistory>(`${this.urlRule2}/${symbol}`);
   }
 }
