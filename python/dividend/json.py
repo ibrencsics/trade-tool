@@ -28,3 +28,7 @@ class TimeAndValue(BaseModel):
 class DividendHistory(BaseModel):
     symbol: str
     values: List[TimeAndValue]
+
+class StockPrice(BaseModel):
+    symbol: str
+    values: List[TimeAndValue]

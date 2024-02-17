@@ -4,7 +4,7 @@ import yfinance as yf
 
 from fastapi import APIRouter
 
-from dividend.json import StockData, Rule4, TimeAndValue, DividendHistory
+from dividend.json import StockData, Rule4, TimeAndValue, DividendHistory, StockPrice
 
 router = APIRouter()
 # from fastapi import FastAPI
@@ -98,17 +98,43 @@ def df2json(symbol: str, df: pd.DataFrame):
 async def rule2(symbol: str):
     ticker = yf.Ticker(symbol)
     div = ticker.dividends
+    
     # Rule 2: Dividend always growing
 
     values = list()
-    # for ts in div.index:
-        # values.append(ts, div)
     for index, value in div.items():
         values.append(TimeAndValue(timestamp=index.strftime('%Y-%m-%d'), value=value))
         
     return DividendHistory(symbol=symbol, values=values)
     
     # return div.to_dict()
+
+@router.get("/dividend/price/{symbol}")
+async def getPrice(symbol: str):
+    ticker = yf.Ticker(symbol)
+    hist = ticker.history(period="5y", interval="1mo")
+    
+    logging.info(hist.dtypes)
+
+    values = list()
+    for ts in hist.index:
+        values.append(TimeAndValue(timestamp=ts.strftime('%Y-%m-%d'), value=hist.Close[ts]))
+    
+    return StockPrice(symbol=symbol, values=values)
+
+@router.get("/test/{symbol}")
+async def test(symbol: str):
+    ticker = yf.Ticker(symbol)
+    fast_info = ticker.fast_info
+    logging.info(fast_info.toJSON)
+
+    balancesheet = ticker.balancesheet
+    logging.info(balancesheet)
+
+    cash_flow = ticker.cash_flow
+    logging.info(cash_flow)
+
+    return ""
 
 def get_dataframe():
     # Rule 1: Take the dividend champions
