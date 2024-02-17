@@ -29,7 +29,8 @@
         [rowspan]="( cardLayout | async )?.chart?.rows"
       >
         <app-card title="Stock dividend {{c.symbol}}" (removed)="remove(c)">
-          <app-dividend-history [command]="c"></app-dividend-history>
+          <app-dividend-history *ngIf="c?.showDividendHistory" [command]="c"></app-dividend-history>
+          <app-stock-price *ngIf="c?.showPriceHistory" [command]="c"></app-stock-price>
         </app-card>
         <!-- <app-card title="Card {{c}}" (removed)="remove(c)"><div>Chart Content Here</div></app-card> -->
       </mat-grid-tile>

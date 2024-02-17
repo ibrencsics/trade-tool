@@ -53,7 +53,18 @@ export class DividendTableComponent implements AfterViewInit  {
   onSelect(symbol: string) {
     this.singleCommand.emit({
       runRule4: false,
-      symbol: symbol
+      symbol: symbol,
+      showDividendHistory: true,
+      showPriceHistory: false
+    });
+  }
+
+  getPrice(symbol: string) {
+    this.singleCommand.emit({
+      runRule4: false,
+      symbol: symbol,
+      showDividendHistory: false,
+      showPriceHistory: true
     });
   }
 }

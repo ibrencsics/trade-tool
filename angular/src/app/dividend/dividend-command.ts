@@ -1,4 +1,6 @@
 export interface DividendCommand {
     runRule4?: boolean;
-    symbol?: string
+    symbol?: string;
+    showDividendHistory?: boolean;
+    showPriceHistory?: boolean;
 }

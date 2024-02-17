@@ -6,6 +6,8 @@ import { Candles } from 'src/app/services/candles';
 import { tap, map } from 'rxjs';
 import Annotation from 'chartjs-plugin-annotation';
 import { StockChartData } from 'src/app/stocks/stock-chart-data';
+import { DividendCommand } from 'src/app/dividend/dividend-command';
+import { PythonClientService } from 'src/app/services/python-client.service';
 
 @Component({
   selector: 'app-stock-price',
@@ -13,9 +15,11 @@ import { StockChartData } from 'src/app/stocks/stock-chart-data';
   styleUrls: ['./stock-price.component.css']
 })
 export class StockPriceComponent implements OnInit {
-  @Input({ required: true }) stockChartData!: StockChartData;
+  // @Input({ required: true }) stockChartData!: StockChartData;
+  @Input({ required: true }) command!: DividendCommand;
 
-  constructor(private http: FinnhubClientService) {
+  // constructor(private http: FinnhubClientService) {
+  constructor(private http: PythonClientService) {
     Chart.register(/*Annotation*/);
   }
 
@@ -25,14 +29,14 @@ export class StockPriceComponent implements OnInit {
 
   draw() {
     // this.http.getCandles(symbol, new Date(1695710710000), new Date(1698302710000)).pipe(
-    this.http.getCandles_(this.stockChartData).pipe(
-      tap(candles => console.log(candles)),
-      map(candles => {
+      this.http.getPrice(this.command.symbol ?? "").pipe(
+      // tap(candles => console.log(candles)),
+      map(proceHistory => {
         this.lineChartData.datasets = [];
 
         this.lineChartData.datasets.push({
-          data: candles.c,
-          label: this.stockChartData.symbol,
+          data: proceHistory.values.map(v => v.value),
+          label: this.command.symbol,
           backgroundColor: 'rgba(148,159,177,0.2)',
           borderColor: 'rgba(148,159,177,1)',
           pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -42,9 +46,10 @@ export class StockPriceComponent implements OnInit {
           fill: 'origin',
         });
         
-        this.lineChartData.labels = candles.t
-          .map(d => new Date(d*1000))
-          .map(d => d.toLocaleDateString());
+        // this.lineChartData.labels = proceHistory.t
+        //   .map(d => new Date(d*1000))
+        //   .map(d => d.toLocaleDateString());
+        this.lineChartData.labels = proceHistory.values.map(v => v.timestamp);
           
         this.chart?.update();
       })

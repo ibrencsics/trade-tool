@@ -30,10 +30,10 @@ export class BaseComponent implements OnInit {
       }
  
      return {
-        columns: 4,
+        columns: 6,
         miniCard: { cols: 1, rows: 1 },
         chart: { cols: 2, rows: 2 },
-        table: { cols: 4, rows: 4 },
+        table: { cols: 6, rows: 4 },
       };
     })
   );
