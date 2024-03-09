@@ -4,7 +4,7 @@ import yfinance as yf
 
 from fastapi import APIRouter
 
-from dividend.json import StockData, Rule4, TimeAndValue, DividendHistory, StockPrice
+from dividend.json import Company, StockData, Rule4, TimeAndValue, DividendHistory, StockPrice
 
 router = APIRouter()
 # from fastapi import FastAPI
@@ -112,7 +112,8 @@ async def rule2(symbol: str):
 @router.get("/dividend/price/{symbol}")
 async def getPrice(symbol: str):
     ticker = yf.Ticker(symbol)
-    hist = ticker.history(period="5y", interval="1mo")
+    # hist = ticker.history(period="5y", interval="1mo")
+    hist = ticker.history(period="max", interval="1mo")
     
     logging.info(hist.dtypes)
 
@@ -122,17 +123,65 @@ async def getPrice(symbol: str):
     
     return StockPrice(symbol=symbol, values=values)
 
+@router.get("/dax")
+async def getDaxCompanies():
+    return [
+        Company(name="adidas", symbol="ads.de"), 
+        Company(name="Airbus", symbol="air.de"), 
+        Company(name="Allianz", symbol="alv.de"), 
+        Company(name="BASF", symbol="bas.de"), 
+        Company(name="Bayer", symbol="bayn.de"), 
+        Company(name="Beiersdorf", symbol="bei.de"), 
+        Company(name="BMW", symbol="bmw.de"), 
+        Company(name="Brenntag", symbol="bnr.de"), 
+        Company(name="Commerzbank", symbol="cbk.de"), 
+        Company(name="Continental", symbol="con.de"), 
+        Company(name="Covestro", symbol="1cov.de"), 
+        Company(name="Daimler Truck", symbol="dtg.de"), 
+        Company(name="Deutsche Bank", symbol="db"), 
+        Company(name="Deutsche Börse", symbol="db1.de"),
+        Company(name="Deutsche Telekom", symbol="dte.de"),
+        Company(name="DHL Group", symbol="dhl.de"),
+        Company(name="E.ON", symbol="eoan.de"),
+        Company(name="Fresenius", symbol="fme.de"),
+        Company(name="Hannover Rück", symbol="hnr1.de"),
+        Company(name="Heidelberg Materials", symbol="hei.de"),
+        Company(name="Henkel vz.", symbol="hen3.de"),
+        Company(name="Infineon", symbol="ifx.de"),
+        Company(name="Mercedes-Benz Group", symbol="mbg.de"),
+        Company(name="Merck", symbol="mrk.de"),
+        Company(name="MTU Aero Engines", symbol="mtx.de"),
+        Company(name="Münchener Rückversicherungs-Gesellschaft", symbol="muv2.de"),
+        Company(name="Porsche", symbol="p911.de"),
+        Company(name="Porsche Automobil vz.", symbol="pah3.ag"),
+        Company(name="QIAGEN", symbol="qia.de"),
+        Company(name="Rheinmetall", symbol="rhm.de"),
+        Company(name="RWE", symbol="rwe.de"),
+        Company(name="SAP", symbol="sap.de"),
+        Company(name="Sartorius vz.", symbol="srt.de"),
+        Company(name="Siemens", symbol="sie.de"),
+        Company(name="Siemens Energy", symbol="enr.de"),
+        Company(name="Siemens Healthineers", symbol="shl.de"),
+        Company(name="Symrise", symbol="sy1.de"),
+        Company(name="Volkswagen", symbol="vow3.de"),
+        Company(name="Vonovia", symbol="vna.de"),
+        Company(name="Zalando", symbol="zal.de")
+        ]
+
 @router.get("/test/{symbol}")
 async def test(symbol: str):
     ticker = yf.Ticker(symbol)
-    fast_info = ticker.fast_info
-    logging.info(fast_info.toJSON)
+    # fast_info = ticker.fast_info
+    # logging.info(fast_info.toJSON)
 
-    balancesheet = ticker.balancesheet
-    logging.info(balancesheet)
+    income = ticker.income_stmt
+    logging.info(income.to_json())
 
-    cash_flow = ticker.cash_flow
-    logging.info(cash_flow)
+    # balancesheet = ticker.balancesheet
+    # logging.info(balancesheet)
+
+    # cash_flow = ticker.cash_flow
+    # logging.info(cash_flow)
 
     return ""
 

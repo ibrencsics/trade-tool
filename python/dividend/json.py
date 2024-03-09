@@ -32,3 +32,10 @@ class DividendHistory(BaseModel):
 class StockPrice(BaseModel):
     symbol: str
     values: List[TimeAndValue]
+
+class Company(BaseModel):
+    name: str
+    symbol: str
+
+class CompanyList(BaseModel):
+    symbols: List[Company]
